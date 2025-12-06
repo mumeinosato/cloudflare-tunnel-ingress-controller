@@ -16,16 +16,16 @@ cloudflare:
 
 ingressClass:
   name: cloudflare-tunnel
-  controllerValue: strrl.dev/cloudflare-tunnel-ingress-controller
+  controllerValue: mumeinosato.github.io/cloudflared-ingress
   isDefaultClass: false
 
 replicaCount: 1
 
 image:
-  repository: ghcr.io/mumeinosato/cloudflare-ingress
+  repository: ghcr.io/mumeinosato/cloudflared-ingress
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0434111"
+  tag: "860dc04"
 
 imagePullSecrets: []
 nameOverride: ""
