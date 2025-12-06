@@ -1,0 +1,38 @@
+name: docker-build.yaml
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: cloudflare-ingress
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Set version
+        id: version
+        run: echo "VERSION=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./image/cloudflare-tunnel-ingress-controller
+          file: ./image/cloudflare-tunnel-ingress-controller/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/mumeinosato/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/mumeinosato/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
