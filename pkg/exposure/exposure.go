@@ -16,4 +16,6 @@ type Exposure struct {
 	HTTPHostHeader *string
 	// OriginServerName is the hostname on the origin server certificate.
 	OriginServerName *string
+
+	DisableChunkedEncoding *bool
 }

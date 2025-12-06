@@ -13,3 +13,6 @@ const AnnotationHTTPHostHeader = "cloudflare-tunnel-ingress-controller.strrl.dev
 
 // AnnotationOriginServerName is the hostname on the origin server certificate.
 const AnnotationOriginServerName = "cloudflare-tunnel-ingress-controller.strrl.dev/origin-server-name"
+
+// CustomAnnotations
+const AnnotationDisableChunkedEncoding = "cloudflare-tunnel-ingress-controller.strrl.dev/disable-chunked-encoding"

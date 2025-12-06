@@ -68,6 +68,21 @@ func FromIngressToExposure(ctx context.Context, logger logr.Logger, kubeClient c
 			}
 		}
 
+		var disableChunkedEncoding *bool
+
+		if value, ok := getAnnotation(ingress.Annotations, AnnotationDisableChunkedEncoding); ok {
+			if value == "true" {
+				disableChunkedEncoding = boolPointer(true)
+			} else if value == "false" {
+				disableChunkedEncoding = boolPointer(false)
+			} else {
+				return nil, errors.Errorf(
+					"invalid value for annotation %s, available values: \"true\" or \"false\"",
+					AnnotationDisableChunkedEncoding,
+				)
+			}
+		}
+
 		for _, path := range rule.HTTP.Paths {
 			namespacedName := types.NamespacedName{
 				Namespace: ingress.GetNamespace(),
@@ -109,13 +124,14 @@ func FromIngressToExposure(ctx context.Context, logger logr.Logger, kubeClient c
 			}
 
 			result = append(result, exposure.Exposure{
-				Hostname:              hostname,
-				ServiceTarget:         fmt.Sprintf("%s://%s:%d", scheme, host, port),
-				PathPrefix:            path.Path,
-				IsDeleted:             isDeleted,
-				ProxySSLVerifyEnabled: proxySSLVerifyEnabled,
-				HTTPHostHeader:        httpHostHeader,
-				OriginServerName:      originServerName,
+				Hostname:               hostname,
+				ServiceTarget:          fmt.Sprintf("%s://%s:%d", scheme, host, port),
+				PathPrefix:             path.Path,
+				IsDeleted:              isDeleted,
+				ProxySSLVerifyEnabled:  proxySSLVerifyEnabled,
+				HTTPHostHeader:         httpHostHeader,
+				OriginServerName:       originServerName,
+				DisableChunkedEncoding: disableChunkedEncoding,
 			})
 		}
 	}

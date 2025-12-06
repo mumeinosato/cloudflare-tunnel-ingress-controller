@@ -39,5 +39,12 @@ func fromExposureToCloudflareIngress(ctx context.Context, exposure exposure.Expo
 		}
 	}
 
+	if exposure.DisableChunkedEncoding != nil {
+		if result.OriginRequest == nil {
+			result.OriginRequest = &cloudflare.OriginRequestConfig{}
+		}
+		result.OriginRequest.DisableChunkedEncoding = exposure.DisableChunkedEncoding
+	}
+
 	return &result, nil
 }
