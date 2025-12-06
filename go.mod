@@ -5,6 +5,7 @@ go 1.24.0
 toolchain go1.24.4
 
 require (
+	github.com/STRRL/cloudflare-tunnel-ingress-controller v0.0.21
 	github.com/chromedp/chromedp v0.14.2
 	github.com/cloudflare/cloudflare-go v0.116.0
 	github.com/go-logr/logr v1.4.3
