@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/STRRL/cloudflare-tunnel-ingress-controller/pkg/exposure"
 	"github.com/cloudflare/cloudflare-go"
+	"github.com/mumeinosato/cloudflare-tunnel-ingress-controller/pkg/exposure"
 	"k8s.io/utils/ptr"
 )
 

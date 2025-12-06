@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"slices"
 
-	cloudflarecontroller "github.com/STRRL/cloudflare-tunnel-ingress-controller/pkg/cloudflare-controller"
-	"github.com/STRRL/cloudflare-tunnel-ingress-controller/pkg/exposure"
 	"github.com/go-logr/logr"
+	cloudflarecontroller "github.com/mumeinosato/cloudflare-tunnel-ingress-controller/pkg/cloudflare-controller"
+	"github.com/mumeinosato/cloudflare-tunnel-ingress-controller/pkg/exposure"
 	"github.com/pkg/errors"
 	v1 "k8s.io/api/core/v1"
 	networkingv1 "k8s.io/api/networking/v1"

@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	cloudflarecontroller "github.com/STRRL/cloudflare-tunnel-ingress-controller/pkg/cloudflare-controller"
-	"github.com/STRRL/cloudflare-tunnel-ingress-controller/pkg/controller"
 	"github.com/cloudflare/cloudflare-go"
 	"github.com/go-logr/logr"
 	"github.com/go-logr/stdr"
+	cloudflarecontroller "github.com/mumeinosato/cloudflare-tunnel-ingress-controller/pkg/cloudflare-controller"
+	"github.com/mumeinosato/cloudflare-tunnel-ingress-controller/pkg/controller"
 	"github.com/spf13/cobra"
 	"sigs.k8s.io/controller-runtime/pkg/client/config"
 	crlog "sigs.k8s.io/controller-runtime/pkg/log"
@@ -22,14 +22,14 @@ type rootCmdFlags struct {
 	// for annotation on Ingress
 	ingressClass string
 	// for IngressClass.spec.controller
-	controllerClass       string
-	logLevel              int
-	cloudflareAPIToken    string
-	cloudflareAccountId   string
-	cloudflareTunnelName  string
-	namespace             string
-	cloudflaredProtocol   string
-	cloudflaredExtraArgs  []string
+	controllerClass      string
+	logLevel             int
+	cloudflareAPIToken   string
+	cloudflareAccountId  string
+	cloudflareTunnelName string
+	namespace            string
+	cloudflaredProtocol  string
+	cloudflaredExtraArgs []string
 }
 
 func main() {
@@ -38,7 +38,7 @@ func main() {
 	options := rootCmdFlags{
 		logger:              rootLogger.WithName("main"),
 		ingressClass:        "cloudflare-tunnel",
-		controllerClass:     "strrl.dev/cloudflare-tunnel-ingress-controller",
+		controllerClass:     "mumeinosato.dev/cloudflare-tunnel-ingress-controller",
 		logLevel:            0,
 		namespace:           "default",
 		cloudflaredProtocol: "auto",
